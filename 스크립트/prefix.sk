@@ -1,0 +1,30 @@
+# 해당 스크립트의 저작권은 모두 밀크찬에게 있습니다.
+# 스크립트 및 서버팩을 자신의 이익을 위해 판매시 법적으로 책임이 가해질 수 있습니다.
+
+command /칭호설정 [<text>] [<player>]:
+    permission: op
+    trigger:
+        if player is op:
+            if arg 1 or arg 2 is not set:
+                send "&c명령어의 사용법이 잘못되었습니다. 아래 양식을 확인해주세요"
+                send "&f/칭호설정 스트리머 <닉네임> | &c스트리머 칭호를 적용합니다"
+                send "&f/칭호설정 관리자 <닉네임> | &c관리자 칭호를 적용합니다"
+                send "&f/칭호설정 유저 <닉네임> | &c유저 칭호를 적용합니다 (기본으로 유저칭호는 설정됨)"
+                stop
+            
+            if arg 1 is "스트리머":
+                execute console command "lp user %arg 2% parent set yt"
+                broadcast "&7%arg 2% 님을 &a스트리머 &7그룹에 추가했습니다. &f담당관리자 : %player%"
+
+            else if arg 1 is "관리자":
+                execute console command "lp user %arg 2% parent set admin"
+                broadcast "&7%arg 2% 님을 &c관리자 &7그룹에 추가했습니다. &f담당관리자 : %player%"
+
+            else if arg 1 is "유저":
+                execute console command "lp user %arg 2% parent set default"
+                broadcast "&7%arg 2% 님을 &f유저 &7그룹에 추가했습니다. &f담당관리자 : %player%"
+
+            else:
+                send "&c잘못된 칭호입니다! '스트리머', '관리자', '유저' 중에서 선택하세요."
+        else:
+            send "&c관리자만 사용할 수 있는 명령어입니다!"
