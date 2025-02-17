@@ -1,0 +1,23 @@
+# 해당 스크립트의 저작권은 모두 밀크찬에게 있습니다.
+# 스크립트 및 서버팩을 자신의 이익을 위해 판매시 법적으로 책임이 가해질 수 있습니다.
+
+command /승리 [<player>]:
+	trigger:
+		if player is op:
+			if arg 1 is not set:
+				send "&f/승리 [&e닉네임&f]"
+			if arg 1 is set:
+				send title "&6&lVICTORY" with subtitle "&c%arg 1% &e님이 우승했습니다!" to players for 3 seconds and 0 tick and 0 ticks
+				play sound "item.goat_horn.sound.1" with volume 1 with pitch 1 to the players
+				stop
+				
+on death of player:
+    wait 1 second
+    set {_survivalPlayers::*} to all players where [gamemode of input is survival]
+    if size of {_survivalPlayers::*} = 1:
+        set {_winner} to {_survivalPlayers::1}
+        send title "&6&lVICTORY" with subtitle "&c%{_winner}% &e님이 우승했습니다!" to players for 3 seconds and 0 tick and 0 ticks
+        play sound "item.goat_horn.sound.1" with volume 1 with pitch 1 to players
+        wait 5 second
+        execute console command "중지"
+        execute console command "초기화"

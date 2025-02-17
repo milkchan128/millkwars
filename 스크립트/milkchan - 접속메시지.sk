@@ -1,0 +1,15 @@
+# 해당 스크립트의 저작권은 모두 밀크찬에게 있습니다.
+# 스크립트 및 서버팩을 자신의 이익을 위해 판매시 법적으로 책임이 가해질 수 있습니다.
+
+on join:
+	set join message to "&7[&a+&7] %player%"
+    execute console command "pvp on"
+
+on quit:
+	set quit message to "&7[&c-&7] %player%"
+	
+on death of player:
+    if attacker is a player:
+        set death message to "&c%attacker% &4-> &a%victim%"
+    else:
+        set death message to "&a%victim% &7이(가) 죽었습니다."
