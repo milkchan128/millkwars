@@ -1,4 +1,4 @@
-# 밀크찬 도시능력자 서버팩 | Release 1.1
+# 밀크찬 도시능력자 서버팩 | Release 1.2
 > 도시능력자 플러그인은 [새벽](https://github.com/Daybreak365/AbilityWar)님이 제작했습니다.
 > 추가기능을 개발한 밀크찬은 [AbilityWars](https://github.com/Daybreak365/AbilityWar)의 [라이선스](https://github.com/Daybreak365/AbilityWar/blob/master/LICENSE.md)를 지킵니다.
 
@@ -15,13 +15,15 @@
 - 해당 start.bat 에는 아래와 같은 인수가 담겨있음. [Aikar's Flags](https://docs.papermc.io/paper/aikars-flags)
 ```cmd
 @echo off
-chcp 65001 >nul
-:123
-java -Xms4G -Xmx16G -XX:+IgnoreUnrecognizedVMOptions -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:InitiatingHeapOccupancyPercent=15 -Dusing.aikars.flags=https://mcflags.emc.gs/ -Daikars.new.flags=true -jar server.jar nogui
-pause
-goto 123
+
+:start
+java -Xms12288M -Xmx12288M -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:+ParallelRefProcEnabled -XX:+PerfDisableSharedMem -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1HeapRegionSize=8M -XX:G1HeapWastePercent=5 -XX:G1MaxNewSizePercent=40 -XX:G1MixedGCCountTarget=4 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1NewSizePercent=30 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:G1ReservePercent=20 -XX:InitiatingHeapOccupancyPercent=15 -XX:MaxGCPauseMillis=200 -XX:MaxTenuringThreshold=1 -XX:SurvivorRatio=32 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar server.jar nogui
+
+echo Server restarting...
+echo Press CTRL + C to stop.
+goto :start
 ```
-- 기본값은 **최소 4기가/최대 16G**로 설정되어있음 원하는만큼 변경 가능
+- 기본값은 **최소 12기가/최대 12G**로 설정되어있음 원하는만큼 변경 가능
 
 
 ### 리눅스 사용자용
@@ -53,11 +55,14 @@ chmod +x start.sh
 ## 밀크찬이 추가한 능력자 전쟁 관련 기능&명령어
 ### 기능목록
 - 개인전에서 마지막 1인이 생존했을때 우승 메시지를 자동으로 띄우고 5초후 초기화작업을 시작합니다.
+  
 - 월드보더를 시작하면 월드보더가 특정 시간을 기준점으로 자동으로 줄어듭니다.
+  
 - 초기화 -> 모든 유저를 무적으로 변경/월드보더 자동으로 중지/서버에 모든 엔티티 제거/모든 유저 서바이벌 설정/도시능력자 맵 초기화... 등등
 
 ### 명령어
 - /시작 <랜덤 / 학교 / 대저택> -> 기능 2번과 같이 원하는곳을 중앙으로 월드보더를 시작하며 초반 3분이후 자동으로 줄어듭니다.
+- /팀 [1~14] -> 1~14팀으로 팀게임을 시작합니다. /aw config game 으로 팀게임을 활성화로 변경해주세요!!
 - /중지 -> /시작으로 월드보더를 시작했을때 월드보더를 중지할수 있습니다.
 - /초기화 -> 기능 3번에 초기화작업이 시작됩니다.
 - /칭호설정 <스트리머|관리자|유저> <닉네임> -> 스트리머 혹은 관리자 혹은 유저(기본값) 칭호를 특정 유저에게 적용합니다. (서버에 접속한 기록이 있는유저만 적용가능)
@@ -66,8 +71,8 @@ chmod +x start.sh
 - /능력수락 -> 할당된 능력을 수락할 수 있습니다.
 - /능력거절 -> 할당된 능력을 거절할 수 있습니다.
 - /능력정보 <능력이름> -> 능력이름의 정보를 확인할 수 있습니다.
-- /게임시작 -> 능력자 게임을 시작합니다.
-- /팀챗토글 -> 팀전 설정시 팀챗을 토글할 수 있습니다.
+- /팀채팅 -> 팀전 설정시 팀챗을 토글할 수 있습니다.
+- /팀정보 -> 팀의 정보를 확인할수 있습니다.
 
 ## 플러그인 목록
 - EssentialsX/EssentialsXspawn/EssentialsXchat
